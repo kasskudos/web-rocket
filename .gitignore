@@ -12,3 +12,9 @@ Cargo.lock
 
 # End of https://www.toptal.com/developers/gitignore/api/rust
 
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/modules.xml
+/.idea/codeStyles/Project.xml
+/.idea/vcs.xml
+/.idea/web-rocket.iml
+/idea
