@@ -1,4 +1,4 @@
-use actix_web::{get, App, HttpResponse, HttpServer, Responder};
+use actix_web::{App, HttpServer, Responder};
 use std::env;
 use crate::routes::{healthz, ping};
 
