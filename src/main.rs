@@ -34,8 +34,8 @@ async fn showTables() -> HttpResponse {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let port = env::var("PORT").expect("Missing port number");
-    let address = env::var("ADDRESS").expect("Missing port number");
+    let port = env::var("PORT").unwrap_or("8080".to_string());
+    let address = env::var("ADDRESS").unwrap_or("0.0.0.0".to_string());
     let port = port.parse::<u16>().expect("Invalid port given");
 
     HttpServer::new(|| {
@@ -44,7 +44,7 @@ async fn main() -> std::io::Result<()> {
             .service(ping)
             .service(showTables)
     })
-        .bind((address, port))?
-        .run()
-        .await
+    .bind((address, port))?
+    .run()
+    .await
 }

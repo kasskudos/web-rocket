@@ -1,0 +1,36 @@
+providers = []
+buildImage = 'ghcr.io/railwayapp/nixpacks:ubuntu-1697500996'
+
+[variables]
+NIXPACKS_METADATA = 'rust'
+ADDRESS = '0.0.0.0'
+PORT='8080'
+[phases.build]
+dependsOn = ['setup']
+cmds = [
+    'mkdir -p bin',
+    'cargo build --release',
+    'cp target/release/rocket bin',
+]
+cacheDirectories = [
+    '/root/.cargo/git',
+    '/root/.cargo/registry',
+    'target',
+]
+
+[phases.setup]
+nixPkgs = [
+    'binutils',
+    'gcc',
+    'rust-bin.stable.latest.default',
+]
+nixLibs = [
+    'openssl',
+    'openssl.dev',
+]
+nixOverlays = ['https://github.com/oxalica/rust-overlay/archive/master.tar.gz']
+nixpkgsArchive = '5148520bfab61f99fd25fb9ff7bfbb50dad3c9db'
+
+[start]
+cmd = './bin/rocket'
+
